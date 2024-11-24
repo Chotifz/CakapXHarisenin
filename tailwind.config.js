@@ -9,8 +9,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        lora: ["Lora", "serif"],
-        nunito: ["Nunito", "sans-serif"],
+        lora: ["Lora"],
+        nunito: ["Nunito"],
+        poppins: ["Poppins"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -23,6 +24,7 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        darkgreen: "#2C6B2F",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -34,12 +36,16 @@ module.exports = {
           foreground: "hsl(var(--popover-foreground))",
         },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "hsl(var(--color-bluez))",
+          foreground: "hsl(var(--color-bluez-foreground))",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "hsl(var(--color-tealz))",
+          foreground: "hsl(var(--color-tealz-foreground))",
+        },
+        success: {
+          DEFAULT: "hsl(var(--color-greenz))",
+          foreground: "hsl(var(--color-greenz-foreground))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -52,16 +58,6 @@ module.exports = {
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
-        },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        chart: {
-          1: "hsl(var(--chart-1))",
-          2: "hsl(var(--chart-2))",
-          3: "hsl(var(--chart-3))",
-          4: "hsl(var(--chart-4))",
-          5: "hsl(var(--chart-5))",
         },
       },
     },

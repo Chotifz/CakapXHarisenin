@@ -1,15 +1,13 @@
-import { Inter, Lora, Nunito } from "next/font/google";
-
-export const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-
-export const lora = Lora({
-  subsets: ["latin"],
-  variable: "--font-lora",
-  weight: "400",
-});
+import { Lora, Nunito, Poppins } from "next/font/google";
 
 export const nunito = Nunito({
   subsets: ["latin"],
   variable: "--font-nunito",
-  weight: "400",
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"], // Semua weight Nunito
+});
+
+export const poppins = Poppins({
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"], // Semua weight Poppins
 });
