@@ -1,5 +1,3 @@
-import { fetchBannerData } from "@/lib/api";
-
 import { nunito, poppins } from "@/font";
 import {
   Carousel,
@@ -9,37 +7,20 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Skeleton } from "@/components/ui/skeleton";
+import Link from "next/link";
+import BannerCarousel from "@/components/BannerCarousel";
+import { fetchBanners } from "./action";
 
 const HomePage = async () => {
-  const bannerData = await fetchBannerData();
+  const banners = await fetchBanners();
+
   return (
     <div className="w-full max-w-screen-xl mx-auto px-4">
-      {/* BannerSection   */}
-      {bannerData?.data?.length ? (
-        <Carousel className="w-full max-w-7xl max-h-[26rem] ">
-          <CarouselContent>
-            {bannerData.data.map((banner, index) => (
-              <CarouselItem key={index}>
-                <Link
-                  href={banner.redirectUrl}
-                  className="relative w-full h-full items-center bg-black"
-                >
-                  <img
-                    src={banner.urlBanner}
-                    alt={banner.altTag}
-                    className="md:h-[26rem] w-full rounded-lg"
-                  />
-                </Link>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+      {/* Banner Section */}
+      {banners.data?.length ? (
+        <BannerCarousel banners={banners.data} />
       ) : (
-        <div className="">
-          <Skeleton className="lg:h-[25rem] md:h-[18rem] h-[15rem] rounded-xl bg-slate-400 w-full max-w-7xl max-h-[26rem]" />
-        </div>
+        <Skeleton className="lg:h-[25rem] md:h-[18rem] h-[15rem] rounded-xl bg-slate-400 w-full max-w-7xl max-h-[26rem]" />
       )}
 
       <div className="h-[30vh] ">

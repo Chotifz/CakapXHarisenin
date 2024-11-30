@@ -17,8 +17,8 @@ export default function RootLayout({ children }) {
     <StoreProvider>
       <html lang="en">
         <body>
-          <div className="flex flex-col bg-white overflow-hidden">
-            <Header />
+          <div className="flex flex-col w-full bg-white overflow-visible">
+            <Header className="sticky top-0 z-40 w-full border-b bg-background" />
             {children}
             <Footer />
           </div>

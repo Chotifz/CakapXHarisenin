@@ -2,7 +2,19 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
-import { LogOut, Menu, ShoppingCart, UserCog } from "lucide-react";
+import {
+  BriefcaseBusiness,
+  CircleUserRound,
+  LibraryBig,
+  LogOut,
+  Menu,
+  Search,
+  SearchIcon,
+  ShoppingCart,
+  Store,
+  TextSearch,
+  UserCog,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,28 +24,48 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "./ui/avatar";
+import { Input } from "./ui/input";
 
 function MenuItems() {
-  return <div>Menu</div>;
+  return (
+    <div className="flex h-9 w-full  justify-center items-center">
+      <Input
+        type="text"
+        placeholder="Cari Kursus"
+        className="rounded-l-xl w-full border-secondary"
+      />
+      <div className="rounded-r-xl h-full px-2 content-center border border-secondary">
+        {" "}
+        <Search className="w-5 text-primary " />
+      </div>
+    </div>
+  );
 }
 
 function HeaderLeftContent() {
   return (
-    <div className="flex lg:items-center lg:flex-row flex-col gap-4">
+    <div className="flex md:items-center md:flex-row flex-col gap-4">
       <Sheet>
-        <Button variant="outline" size="icon">
-          <ShoppingCart className="h-6 w-6" />
-          <span className="sr-only">User cart</span>
+        <Button className="bg-primary rounded-xl">
+          <Store />
+          <span>Beli</span>
+        </Button>
+        <Button variant="ghost">
+          <LibraryBig />
+          <span>Kursus Saya</span>
+        </Button>
+        <Button size="icon" variant="ghost">
+          <BriefcaseBusiness />
+          <span>Karier</span>
         </Button>
       </Sheet>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar className="bg-black">
-            <AvatarFallback className="bg-black text-white font-extrabold">
-              {/* {user.userName[0].toUpperCase()} */}R
-            </AvatarFallback>
-          </Avatar>
+          <Button variant="ghost">
+            <CircleUserRound />
+            <span>Profil</span>
+          </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent side="right" className="w-56">
           <DropdownMenuLabel>Logged in as Rifz</DropdownMenuLabel>
@@ -58,29 +90,30 @@ function HeaderLeftContent() {
 const Header = () => {
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background ">
-      <div className="flex h-16 items-center justify-between px-4 md:px-4 max-w-7xl mx-auto">
+      <div className="flex gap-4 h-16 items-center justify-between px-4 md:px-4 max-w-7xl mx-auto">
         <Link href="/">
           <img
+            className="h-7"
             src="https://s3-ap-southeast-1.amazonaws.com/resources.squline.com/upskill/assets/svg/cakap-logo.svg"
             alt="Cakap Logo"
           />
         </Link>
         <Sheet>
           <SheetTrigger asChild>
-            <Button className="lg:hidden" variant="outline" size="icon">
+            <Button className="md:hidden" variant="outline" size="icon">
               <Menu className="h-6 w-6" />
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-full max-w-xs lg:hidden">
+          <SheetContent side="left" className="w-full max-w-xs md:hidden">
             <MenuItems />
             <HeaderLeftContent />
           </SheetContent>
         </Sheet>
 
-        <div className="hidden lg:block">{<MenuItems />}</div>
+        <div className="hidden w-full max-w-xl md:block">{<MenuItems />}</div>
 
-        <div className="hidden lg:block">
+        <div className="hidden md:block">
           <HeaderLeftContent />
         </div>
       </div>
