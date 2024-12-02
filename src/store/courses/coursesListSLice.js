@@ -23,7 +23,7 @@ export const fetchCoursesThunk = createAsyncThunk(
       ...(courseOrderBy && { courseOrderBy }),
     };
 
-    console.log("Params in Thunk:", params);
+    // console.log("Params in Thunk:", params);
 
     try {
       const response = await axiosInstance.get("/course/list", { params });
@@ -33,6 +33,15 @@ export const fetchCoursesThunk = createAsyncThunk(
     }
   }
 );
+
+export const fetchHighlightedCoursesThunk = createAsyncThunk(
+  "courses/fetchHighlight",
+  async () => {
+    const response = await axiosInstance.get("/course/highlight");
+    return response.data;
+  }
+);
+
 const coursesSlice = createSlice({
   name: "courses",
   initialState,
@@ -66,6 +75,9 @@ const coursesSlice = createSlice({
       .addCase(fetchCoursesThunk.rejected, (state, action) => {
         state.error = action.payload || "Failed to fetch courses";
         state.loading = false;
+      })
+      .addCase(fetchHighlightedCoursesThunk.fulfilled, (state, action) => {
+        state.highlightedCourses = action.payload.data;
       });
   },
 });

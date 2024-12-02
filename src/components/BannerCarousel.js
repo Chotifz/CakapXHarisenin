@@ -21,7 +21,7 @@ const BannerCarousel = ({ banners }) => {
   };
 
   return (
-    <div className="relative w-full max-w-7xl mx-auto overflow-hidden bg-[#013451] rounded-xl">
+    <div className="relative w-full max-w-7xl mx-auto overflow-hidden bg-[#013451] rounded-xl mb-10">
       <div
         className="flex transition-transform duration-500"
         style={{
@@ -32,7 +32,7 @@ const BannerCarousel = ({ banners }) => {
           <Link
             href={banner.redirectUrl}
             key={index}
-            className="relative pb-10 flex-shrink-0 w-full h-[15rem] md:h-[20rem] lg:h-[25rem] "
+            className="relative flex-shrink-0 w-full h-[12rem] md:h-[20rem] lg:h-[25rem] "
           >
             <img
               src={banner.urlBanner}
@@ -57,9 +57,9 @@ const BannerCarousel = ({ banners }) => {
         <ChevronRight className="w-6 h-6 text-primary " />
       </Button>
 
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      {/* <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
         {banners.map((_, index) => (
-          <button
+          <div
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={` ${
@@ -68,9 +68,9 @@ const BannerCarousel = ({ banners }) => {
                 : "bg-gray-300 w-3 h-3 rounded-full"
             }`}
             aria-label={`Go to slide ${index + 1}`}
-          ></button>
+          ></div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

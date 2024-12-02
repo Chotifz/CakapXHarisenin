@@ -31,7 +31,7 @@ export default function CourseListPage() {
   );
 
   const { orderBy } = useSelector((state) => state.courses);
-  console.log(orderBy);
+  // console.log(selectedCategory);
   const handleFilterChange = (selectedCategory) => {
     dispatch(resetCourses());
     dispatch(setSelectedCategory(selectedCategory));
@@ -89,29 +89,27 @@ export default function CourseListPage() {
 
   console.log(courses);
   return (
-    <div className="max-w-7xl mx-auto">
-      <div>
-        <FilterBar
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onFilterChange={handleFilterChange}
-          onOrderChange={handleOrderChange}
-          orderBy={orderBy}
-        />
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-10 border-t border-t-slate-500">
-          {courses.map((course, index) => (
-            <CourseCard
-              key={`${course.courseId}-${index}`}
-              course={course}
-              onClickChange={handleCourseClick}
-            />
-          ))}
-        </div>
-        {loading && <Loader />}
-        {!hasMore && (
-          <p className="text-center text-gray-500">No more courses to load.</p>
-        )}
+    <div className="w-full max-w-7xl mx-auto">
+      <FilterBar
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onFilterChange={handleFilterChange}
+        onOrderChange={handleOrderChange}
+        orderBy={orderBy}
+      />
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-10 border-t border-t-slate-500">
+        {courses.map((course, index) => (
+          <CourseCard
+            key={`${course.courseId}-${index}`}
+            course={course}
+            onClickChange={handleCourseClick}
+          />
+        ))}
       </div>
+      {loading && <Loader />}
+      {!hasMore && (
+        <p className="text-center text-gray-500">No more courses to load.</p>
+      )}
     </div>
   );
 }

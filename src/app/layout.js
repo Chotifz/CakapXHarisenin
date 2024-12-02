@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
           <div className="flex flex-col w-full bg-white overflow-visible">
             <Header className="sticky top-0 z-40 w-full border-b bg-background" />
             {children}
-            <Footer />
+            {/* <Footer /> */}
           </div>
         </body>
       </html>

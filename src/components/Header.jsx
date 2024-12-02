@@ -9,10 +9,7 @@ import {
   LogOut,
   Menu,
   Search,
-  SearchIcon,
-  ShoppingCart,
   Store,
-  TextSearch,
   UserCog,
 } from "lucide-react";
 import {
@@ -23,12 +20,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Input } from "./ui/input";
 
 function MenuItems() {
   return (
-    <div className="flex h-9 w-full  justify-center items-center">
+    <div className="flex h-9 w-full  justify-start items-center">
       <Input
         type="text"
         placeholder="Cari Kursus"
@@ -90,23 +86,34 @@ function HeaderLeftContent() {
 const Header = () => {
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background ">
-      <div className="flex gap-4 h-16 items-center justify-between px-4 md:px-4 max-w-7xl mx-auto">
+      <div className="flex  gap-4 h-16 items-center justify-between px-4 md:px-4 max-w-7xl mx-auto">
         <Link href="/">
           <img
-            className="h-7"
+            className=" max-w-28 w-28"
             src="https://s3-ap-southeast-1.amazonaws.com/resources.squline.com/upskill/assets/svg/cakap-logo.svg"
             alt="Cakap Logo"
           />
         </Link>
+        <div className="flex h-9 w-full  justify-start items-center md:hidden">
+          <Input
+            type="text"
+            placeholder="Cari Kursus"
+            className="rounded-l-xl w-full border-secondary"
+          />
+          <div className="rounded-r-xl h-full px-2 content-center border border-secondary">
+            {" "}
+            <Search className="w-5 text-primary " />
+          </div>
+        </div>
         <Sheet>
           <SheetTrigger asChild>
-            <Button className="md:hidden" variant="outline" size="icon">
-              <Menu className="h-6 w-6" />
+            <Button className="md:hidden w-14" variant="outline" size="icon">
+              <Menu />
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-full max-w-xs md:hidden">
-            <MenuItems />
+            {/* <MenuItems /> */}
             <HeaderLeftContent />
           </SheetContent>
         </Sheet>
