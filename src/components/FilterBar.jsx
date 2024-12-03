@@ -1,14 +1,12 @@
 "use client";
 
+import { orderOptions } from "@/config";
 import { Button } from "./ui/button";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  // DropdownMenuItem,
-  // DropdownMenuLabel,
-  // DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 export default function FilterBar({
@@ -17,22 +15,16 @@ export default function FilterBar({
   onFilterChange,
   onOrderChange,
   orderBy,
+  onFilterPrakerja,
+  onFilterPrakerjaChange,
 }) {
-  const orderOptions = [
-    { label: "Terbaru", value: "" },
-    { label: "Ulasan", value: "RATING" },
-    { label: "Terlaris", value: "BEST_SELLER" },
-    { label: "Harga Terendah", value: "CHEAPER_PRICE" },
-  ];
-
   const selectedCategoryForName = categories.find(
     (category) => category.categoriesId === selectedCategory
   );
-  // console.log(selectedCategoryForName?.categoryName);
+
   return (
     <div className="w-full flex flex-col justify-between items-start pt-4 ">
-      {/* Category Filter */}
-      <div className="w-full h-52 bg-secondary text-white flex flex-col gap-2  items-start py-6 px-4 rounded-xl">
+      <div className="w-full h-52 bg-secondary text-white flex flex-col gap-4  items-start py-6 px-4 rounded-xl">
         <span className="text-start font-bold text-3xl">
           {selectedCategory === ""
             ? "Semua Kategori"
@@ -40,57 +32,62 @@ export default function FilterBar({
         </span>
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <Button
-              variant="outline"
-              className=" bg-transparent rounded-xl font-medium"
-            >
+            <span className=" bg-transparent rounded-xl border text-sm p-2 font-medium">
               Ubah Kategori
-            </Button>
+            </span>
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="start"
             side="bottom"
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 h-60 w-[20rem] sm:w-[40rem] md:w-[48rem] lg:w-[64rem] overflow-scroll mt-2 rounded"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-h-60 max-w-full overflow-auto mt-2 rounded"
           >
             {categories.map((cat) => (
-              <Button
-                variant="ghost"
+              <DropdownMenuItem
                 key={cat.categoriesId}
-                className={`px-4 py-2 my-2 text-base text-black border-b  ${
+                className={`w-full flex items-center justify-start gap-2 px-4 py-1 my-1 text-black border-b text-sm font-medium ${
                   selectedCategory === cat.categoriesId
-                    ? "border-b-2 border-black hover:bg-transparent"
-                    : " hover:bg-transparent"
+                    ? "border-b-2 border-black"
+                    : ""
                 }`}
                 onClick={() => onFilterChange(cat.categoriesId)}
               >
-                <DropdownMenuItem className="w-full flex items-center justify-start gap-2 ">
-                  <div className="relative">
-                    <img className="w-6" src={cat.icon} alt="" />
-                  </div>
-                  <span>{cat.categoryName}</span>
-                </DropdownMenuItem>
-              </Button>
+                <div className="relative">
+                  <img className="w-6" src={cat.icon} alt={cat.categoryName} />
+                </div>
+                <span>{cat.categoryName}</span>
+              </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+      <div className="w-full flex flex-wrap justify-between gap-2 pt-4">
+        <div>
+          {orderOptions.map((option) => (
+            <Button
+              key={option.value}
+              variant="ghost"
+              className={`px-2 py-2 text-base text-black ${
+                orderBy === option.value
+                  ? "border-b-2 border-black hover:bg-transparent"
+                  : " hover:bg-transparent"
+              }`}
+              onClick={() => onOrderChange(option.value)}
+            >
+              {option.label}
+            </Button>
+          ))}
+        </div>
 
-      {/* Order Filter */}
-      <div className="w-full flex flex-wrap gap-2 pt-4">
-        {orderOptions.map((option) => (
-          <Button
-            key={option.value}
-            variant="ghost"
-            className={`px-2 py-2 text-base text-black ${
-              orderBy === option.value
-                ? "border-b-2 border-black hover:bg-transparent"
-                : " hover:bg-transparent"
-            }`}
-            onClick={() => onOrderChange(option.value)}
-          >
-            {option.label}
-          </Button>
-        ))}
+        <div className="text-base font-semibold text-black  content-center">
+          <label>
+            <input
+              type="checkbox"
+              checked={onFilterPrakerja}
+              onChange={(e) => onFilterPrakerjaChange(e.target.checked)}
+            />
+            <span className="px-2">Kursus Prakerja</span>
+          </label>
+        </div>
       </div>
     </div>
   );

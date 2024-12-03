@@ -7,6 +7,7 @@ const initialState = {
   hasMore: true,
   loading: false,
   orderBy: "",
+  filter: { prakerjaFilter: false },
   error: null,
 };
 
@@ -59,6 +60,9 @@ const coursesSlice = createSlice({
     incrementPage(state) {
       state.page += 1;
     },
+    setFilter: (state, action) => {
+      state.filter = { ...state.filter, ...action.payload };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -82,5 +86,6 @@ const coursesSlice = createSlice({
   },
 });
 
-export const { setOrderBy, resetCourses, incrementPage } = coursesSlice.actions;
+export const { setOrderBy, resetCourses, incrementPage, setFilter } =
+  coursesSlice.actions;
 export default coursesSlice.reducer;

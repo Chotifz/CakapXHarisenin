@@ -13,25 +13,34 @@ import {
   fetchCoursesThunk,
   incrementPage,
   resetCourses,
+  setFilter,
   setOrderBy,
 } from "@/store/courses/coursesListSLice";
 import { useRouter } from "next/navigation";
 
 export default function CourseListPage() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const {
     list: courses,
     page,
     hasMore,
     loading,
+    orderBy,
+    filter,
   } = useSelector((state) => state.courses);
 
   const { list: categories, selectedCategory } = useSelector(
     (state) => state.categories
   );
 
-  const { orderBy } = useSelector((state) => state.courses);
-  // console.log(selectedCategory);
+  const filteredCourses = courses.filter((course) => {
+    if (filter.prakerjaFilter) {
+      return course.isSupportPrakerja;
+    }
+    return true;
+  });
+
   const handleFilterChange = (selectedCategory) => {
     dispatch(resetCourses());
     dispatch(setSelectedCategory(selectedCategory));
@@ -52,10 +61,11 @@ export default function CourseListPage() {
     );
   };
 
-  const router = useRouter();
-
   const handleCourseClick = (id) => {
     router.push(`/courses/${id}`);
+  };
+  const handleFilterPrakerjaChange = (isChecked) => {
+    dispatch(setFilter({ prakerjaFilter: isChecked }));
   };
 
   useEffect(() => {
@@ -87,7 +97,8 @@ export default function CourseListPage() {
     }
   }, [page, selectedCategory, dispatch]);
 
-  console.log(courses);
+  // console.log(courses);
+  console.log(filteredCourses);
   return (
     <div className="w-full max-w-7xl mx-auto">
       <FilterBar
@@ -96,9 +107,11 @@ export default function CourseListPage() {
         onFilterChange={handleFilterChange}
         onOrderChange={handleOrderChange}
         orderBy={orderBy}
+        onFilterPrakerja={filter.prakerjaFilter}
+        onFilterPrakerjaChange={handleFilterPrakerjaChange}
       />
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-10 border-t border-t-slate-500">
-        {courses.map((course, index) => (
+        {filteredCourses.map((course, index) => (
           <CourseCard
             key={`${course.courseId}-${index}`}
             course={course}

@@ -17,28 +17,12 @@ const HomePage = async () => {
 
   return (
     <div className="w-full max-w-screen-xl mx-auto px-4 ">
-      {/* Banner Section */}
       {banners.data?.length ? (
         <BannerCarousel banners={banners.data} />
       ) : (
         <Skeleton className="lg:h-[25rem] md:h-[18rem] h-[15rem] rounded-xl bg-slate-400 w-full max-w-7xl max-h-[26rem]" />
       )}
       <VoucherCard />
-
-      <div className="h-[30vh] ">
-        <h1 className={`${poppins.className} `}>
-          <img
-            alt="performance-icon"
-            src="https://s3.ap-southeast-1.amazonaws.com/resources.squline.com/upskill/assets/icons/blue-rocket.png"
-          />
-          Cakap Upskill
-        </h1>
-        <div></div>
-
-        <p className={`${nunito.className}  text-gray-600 text-lg`}>
-          Kuasai keterampilan baru dengan kursus yang dirancang khusus!
-        </p>
-      </div>
 
       {/* CourseSection  */}
       {/* CategorySection  */}

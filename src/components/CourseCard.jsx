@@ -1,54 +1,38 @@
 "use client";
 
+import { formatCurrency } from "@/config";
 import { Badge } from "./ui/badge";
 import { Card, CardContent, CardFooter, CardTitle } from "./ui/card";
 import StarRating from "./ui/star-rating";
 
-function formatCurrency(value) {
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    minimumFractionDigits: 0,
-  })
-    .format(value)
-    .replace("Rp", "RP");
-}
-export default function CourseCard({ course, onClickChange }) {
-  console.log(course?.reviews?.rating);
-  // console.log(course.partner.partnerLogo.thumbnail);
+function CourseCard({ course, onClickChange }) {
   return (
     <Card className="flex flex-col justify-between w-full max-w-md cursor-pointer">
-      <div className="h-48" onClick={() => onClickChange(course.courseId)}>
+      <div
+        className="h-48 relative"
+        onClick={() => onClickChange(course.courseId)}
+      >
         {course.thumbnails?.[0]?.url && (
-          <div className="relative">
+          <div className="relative  ">
             <img
               src={course.thumbnails[0].url}
               alt={`Thumbnail for ${course.courseName}`}
               className="w-full h-48 object-cover rounded-t-xl "
             />
-
-            <div className="flex gap-2 absolute top-2 left-2">
-              {course?.isSupportPrakerja > 0 ? (
-                <Badge
-                  className={
-                    " bg-secondary hover:bg-success rounded px-2 py-1 text-sm"
-                  }
-                >
-                  Prakerja
-                </Badge>
-              ) : null}
-              {course?.isBnspSupport > 0 ? (
-                <Badge
-                  className={
-                    " bg-success hover:bg-secondary rounded px-2 py-1 text-sm"
-                  }
-                >
-                  BNSP
-                </Badge>
-              ) : null}
-            </div>
           </div>
         )}
+        <div className="flex gap-2 absolute top-2 left-2">
+          {course?.isSupportPrakerja > 0 ? (
+            <Badge className={" bg-secondary  rounded px-2 py-1 text-sm"}>
+              Prakerja
+            </Badge>
+          ) : null}
+          {course?.isBnspSupport > 0 ? (
+            <Badge className={" bg-success rounded px-2 py-1 text-sm"}>
+              BNSP
+            </Badge>
+          ) : null}
+        </div>
       </div>
       <CardContent>
         <CardTitle className="text-lg font-semibold">
@@ -72,14 +56,26 @@ export default function CourseCard({ course, onClickChange }) {
             total={course.reviews.total}
           />
         ) : null}
-
-        {/* diskon */}
       </CardContent>
-      <CardFooter>
-        <div className="text-lg font-bold text-primary">
-          {formatCurrency(course.priceCrossedOut)}
+      <CardFooter className="flex flex-col items-start gap-2">
+        <div className="flex gap-2 text-sm font-semibold">
+          <span className="line-through text-slate-500">
+            {formatCurrency(course.basicPrice)}
+          </span>
+          {course.label != null ? (
+            <span className="text-red-500 bg-red-100 px-1">{course.label}</span>
+          ) : null}
         </div>
+        {course.finalPrice > 0 ? (
+          <span className="text-lg font-bold text-primary">
+            {formatCurrency(course.finalPrice)}
+          </span>
+        ) : (
+          <span className="text-lg font-bold text-primary">Gratis</span>
+        )}
       </CardFooter>
     </Card>
   );
 }
+
+export default CourseCard;
