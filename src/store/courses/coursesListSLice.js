@@ -1,3 +1,5 @@
+"use sever";
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "@/lib/axios";
 
@@ -24,7 +26,7 @@ export const fetchCoursesThunk = createAsyncThunk(
       ...(courseOrderBy && { courseOrderBy }),
     };
 
-    // console.log("Params in Thunk:", params);
+    console.log("Params in Thunk:", params);
 
     try {
       const response = await axiosInstance.get("/course/list", { params });

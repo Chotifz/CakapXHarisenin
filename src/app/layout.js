@@ -1,7 +1,8 @@
 import Footer from "@/components/Footer";
 import "./globals.css";
 import { StoreProvider } from "@/store/StoreProvider";
-import Header from "@/components/Header";
+
+import { HeaderTemplate } from "@/components/template/header";
 
 export const metadata = {
   title: "Kursus Online Bersertifikat & Pelatihan Keterampilan Kerja - Cakap",
@@ -18,7 +19,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body>
           <div className="flex flex-col w-full bg-white overflow-visible">
-            <Header className="sticky top-0 z-40 w-full border-b bg-background" />
+            <HeaderTemplate />
             {children}
             {/* <Footer /> */}
           </div>
