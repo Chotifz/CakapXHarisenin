@@ -78,3 +78,12 @@ export const fetchDetail = async (id, platform = "WEB") => {
     throw new Error(error.response?.data || error.message);
   }
 };
+
+export const fetchSummary = async () => {
+  try {
+    const response = await axiosInstance.get("/rating/815/summary");
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data || error.message);
+  }
+};
