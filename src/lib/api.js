@@ -79,6 +79,27 @@ export const fetchDetail = async (id, platform = "WEB") => {
   }
 };
 
+
+export const fetchSummary = async () => {
+  try {
+    const response = await axiosInstance.get("/rating/815/summary");
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data || error.message);
+  }
+};
+
+export const fetchBannerBahasa = async () => {
+  try {
+    const response = await axiosInstance.get(
+      "/whitelabel-setting/cakap/club-banner"
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data || error.message);
+  }
+};
+
 export const fetchFaqList = async ({ tenant = "cakap" }) => {
   try {
     const response = await axiosInstance.get("/faq", {
@@ -90,6 +111,15 @@ export const fetchFaqList = async ({ tenant = "cakap" }) => {
     return response.data;
   } catch (error) {
     console.error("API Error:", error.response?.data || error.message);
+  }
+
+export const fetchClubList = async () => {
+  try {
+    const response = await axiosInstance.get(
+      "https://api-staging.cakap.com/v2/cakap-group/club-list"
+    );
+    return response.data;
+  } catch (error) {
     throw new Error(error.response?.data || error.message);
   }
 };

@@ -1,15 +1,26 @@
 import { Button } from "@/components/ui/button";
+import { fetchDetail } from "@/lib/api";
 
-const PriceCourse = () => {
+const PriceCourse = async () => {
+  const courseDetail = await fetchDetail(815, "WEB");
+  const { basicPrice, label, finalPrice } = courseDetail.data;
   return (
     <div
-      className="bg-black w-2/6 border border-white p-4 sticky my-4 rounded-md"
+      className="w-2/6 border border-slate-300 p-4 sticky my-4 rounded-md"
       style={{ top: "5rem", height: "fit-content" }}
     >
       <div className="flex justify-between">
-        <p className="text-white">10%</p>
-        <p className="text-white">Rp 100.000</p>
-        <p className="text-white">Rp 90.000</p>
+        <div className="flex gap-2 items-center">
+          <p className="text-white bg-red-500 inline-block px-1 py-1 rounded-full font-semibold text-xs">
+            {label}
+          </p>
+          <p className="text-slate-400 line-through">
+            Rp {basicPrice.toLocaleString("id-ID")}
+          </p>
+        </div>
+        <p className="text-green-500 font-bold">
+          Rp {finalPrice.toLocaleString("id-ID")}
+        </p>
       </div>
       <div className="mt-4 space-y-2">
         <Button className="w-full border border-white rounded-md text-white bg-blue-500">
