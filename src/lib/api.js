@@ -79,6 +79,7 @@ export const fetchDetail = async (id, platform = "WEB") => {
   }
 };
 
+
 export const fetchSummary = async () => {
   try {
     const response = await axiosInstance.get("/rating/815/summary");
@@ -98,6 +99,19 @@ export const fetchBannerBahasa = async () => {
     throw new Error(error.response?.data || error.message);
   }
 };
+
+export const fetchFaqList = async ({ tenant = "cakap" }) => {
+  try {
+    const response = await axiosInstance.get("/faq", {
+      params: {
+        tenant,
+      },
+    });
+    console.log("API Response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error:", error.response?.data || error.message);
+  }
 
 export const fetchClubList = async () => {
   try {
