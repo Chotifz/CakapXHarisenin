@@ -1,9 +1,8 @@
 import BannerPage from "@/components/fragments/banner-page";
 import AboutCourseTemplate from "@/components/template/about-course-template";
+import CourseTemplate from "@/components/template/course-template";
 
-import CarouselCourse from "@/components/template/carousel-course";
 import { fetchDetail, fetchSummary, fetchHighlightedCourses } from "@/lib/api";
-
 
 export default async function DetailList() {
   const courseDetail = await fetchDetail(815, "WEB");
@@ -36,7 +35,7 @@ export default async function DetailList() {
         </div>
       </BannerPage>
       <AboutCourseTemplate />
-      <CourseTemplate courses={courseHighlight} tittle={"Kursus Terkait"} />
+      <CourseTemplate courses={courseHighlight.data} title={"Kursus Terkait"} />
     </div>
   );
 }

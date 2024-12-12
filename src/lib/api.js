@@ -79,7 +79,6 @@ export const fetchDetail = async (id, platform = "WEB") => {
   }
 };
 
-
 export const fetchSummary = async () => {
   try {
     const response = await axiosInstance.get("/rating/815/summary");
@@ -112,6 +111,7 @@ export const fetchFaqList = async ({ tenant = "cakap" }) => {
   } catch (error) {
     console.error("API Error:", error.response?.data || error.message);
   }
+};
 
 export const fetchClubList = async () => {
   try {
