@@ -1,6 +1,7 @@
 import CardFragment from "../fragments/card-fragment";
 import { Button } from "../ui/button";
 import { fetchBannerBahasa, fetchClubList } from "@/lib/api";
+import SectionTemplate from "./section-template";
 
 const LiveBahasa = async () => {
   const { data } = await fetchBannerBahasa();
@@ -8,14 +9,12 @@ const LiveBahasa = async () => {
   const { data: clubListData } = await fetchClubList();
 
   return (
-    <section>
-      <div className="text-center">
-        <h1 className="text-2xl">Kelas Live Bahasa Asing di Cakap Club</h1>
-        <p>
-          Belajar langsung bersama native speaker atau guru lokal profesional
-          lengkap dengan bahasa pengantar
-        </p>
-      </div>
+    <SectionTemplate
+      title={"Kelas Live Bahasa Asing di Cakap Club"}
+      description={
+        "Belajar langsung bersama native speaker atau guru lokal profesional lengkap dengan bahasa pengantar"
+      }
+    >
       <div className="flex flex-col md:flex-row justify-center gap-6 my-6">
         <div className="grid grid-cols-2 gap-4 md:w-1/2 w-full px-4">
           {clubListData.slice(0, 4).map((club, index) => (
@@ -45,7 +44,7 @@ const LiveBahasa = async () => {
           <img src={bannerUrl} alt="tes" className="max-w-full h-auto" />
         </div>
       </div>
-    </section>
+    </SectionTemplate>
   );
 };
 

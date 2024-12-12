@@ -1,6 +1,7 @@
 import CourseTemplate from "@/components/template/course-template";
 import FaqTemplate from "@/components/template/faq-template";
 import HeroDealTemplate from "@/components/template/hero-deal-template";
+import LiveBahasa from "@/components/template/live-bahasa";
 import { fetchBanners, fetchCourses, fetchHighlightedCourses } from "@/lib/api";
 
 async function HomePage() {
@@ -25,6 +26,7 @@ async function HomePage() {
         description={""}
         courses={bestSellerCourses.data.course}
       />
+      <LiveBahasa />
       <FaqTemplate />
     </>
   );
