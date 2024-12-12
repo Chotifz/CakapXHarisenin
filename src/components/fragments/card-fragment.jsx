@@ -14,7 +14,7 @@ export default function CardFragment({
 }) {
   return (
     <Card className={className}>
-      <CardHeader>{header}</CardHeader>
+      <CardHeader className="bg-secondary p-3">{header}</CardHeader>
       <CardContent>
         {typeof content === "string" ? <p>{content}</p> : content}
       </CardContent>

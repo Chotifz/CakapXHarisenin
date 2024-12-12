@@ -87,3 +87,25 @@ export const fetchSummary = async () => {
     throw new Error(error.response?.data || error.message);
   }
 };
+
+export const fetchBannerBahasa = async () => {
+  try {
+    const response = await axiosInstance.get(
+      "/whitelabel-setting/cakap/club-banner"
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data || error.message);
+  }
+};
+
+export const fetchClubList = async () => {
+  try {
+    const response = await axiosInstance.get(
+      "https://api-staging.cakap.com/v2/cakap-group/club-list"
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data || error.message);
+  }
+};
