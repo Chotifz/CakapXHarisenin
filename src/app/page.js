@@ -3,6 +3,7 @@ import FaqTemplate from "@/components/template/faq-template";
 import HeroDealTemplate from "@/components/template/hero-deal-template";
 import { fetchBanners, fetchCourses, fetchHighlightedCourses } from "@/lib/api";
 import PartnerListHomeTemplate from "@/components/template/partner-list-home-template";
+import LiveBahasa from "@/components/template/live-bahasa";
 
 async function HomePage() {
   const banners = await fetchBanners();
@@ -26,7 +27,7 @@ async function HomePage() {
         description={""}
         courses={bestSellerCourses?.data?.course}
       />
-      <LiveBahasa />
+      {/* <LiveBahasa /> */}
       <PartnerListHomeTemplate />
       <FaqTemplate />
     </>
