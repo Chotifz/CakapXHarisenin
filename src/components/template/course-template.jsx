@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-
 import CourseCard from "../fragments/course-card";
 import { useRouter } from "next/navigation";
 import SectionTemplate from "./section-template";
@@ -29,28 +28,32 @@ function CourseTemplate({ title, description, courses }) {
   const cardsPerView = 4;
   return (
     <SectionTemplate title={title} description={description}>
-      <Navigation
-        handleBack={handleBack}
-        handleNext={handleNext}
-        handleSeeAllCLick={handleSeeAllCLick}
-        coursesLength={courses.length}
-        currentIndex={currentIndex}
-      />
-      <div
-        className="w-full flex gap-4 transition-transform duration-500"
-        style={{
-          transform: `translateX(-${(currentIndex * 100) / cardsPerView}%)`,
-        }}
-      >
-        {courses.map((item, index) => (
+      {courses ? (
+        <div>
+          <Navigation
+            handleBack={handleBack}
+            handleNext={handleNext}
+            handleSeeAllCLick={handleSeeAllCLick}
+            coursesLength={courses.length}
+            currentIndex={currentIndex}
+          />
           <div
-            key={`${item.courseId}-${index}`}
-            className="w-[calc(25%-1rem)] flex-shrink-0"
+            className="w-full flex gap-4 transition-transform duration-500"
+            style={{
+              transform: `translateX(-${(currentIndex * 100) / cardsPerView}%)`,
+            }}
           >
-            <CourseCard course={item} />
+            {courses.map((item, index) => (
+              <div
+                key={`${item.courseId}-${index}`}
+                className="w-[calc(25%-1rem)] flex-shrink-0"
+              >
+                <CourseCard course={item} />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      ) : null}
     </SectionTemplate>
   );
 }

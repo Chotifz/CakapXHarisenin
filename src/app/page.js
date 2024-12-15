@@ -24,9 +24,9 @@ async function HomePage() {
       <CourseTemplate
         title={"Kursus Terlaris"}
         description={""}
-        courses={bestSellerCourses.data.course}
+        courses={bestSellerCourses?.data?.course}
       />
-      <LiveBahasa />
+      {/* <LiveBahasa /> */}
       <FaqTemplate />
     </>
   );

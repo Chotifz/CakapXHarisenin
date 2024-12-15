@@ -5,10 +5,10 @@ import { Skeleton } from "../ui/skeleton";
 const HeroDealTemplate = ({ banners }) => {
   return (
     <div>
-      {banners.data?.length ? (
+      {banners?.data?.length ? (
         <BannerCarousel banners={banners.data} />
       ) : (
-        <Skeleton className="lg:h-[25rem] md:h-[18rem] h-[15rem] rounded-xl bg-slate-400 w-full max-w-7xl max-h-[26rem]" />
+        <Skeleton className="lg:h-[25rem] md:h-[18rem] h-[15rem] bg-slate-400 w-full max-w-7xl max-h-[26rem]" />
       )}
       <Voucher />
     </div>
