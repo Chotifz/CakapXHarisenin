@@ -8,16 +8,24 @@ const Navigation = ({
   href,
   coursesLength,
   currentIndex,
-  hidden,
+  hiddenNav,
+  hiddenLink,
   cardsPerView,
 }) => {
   return (
     <div className="w-full flex gap-2 justify-end items-center mb-4">
-      <Link className="text-primary font-bold px-2 cursor-pointer" href={href}>
-        <span>Lihat Semua</span>
-      </Link>
+      {hiddenLink ? (
+        ""
+      ) : (
+        <Link
+          className="text-primary font-bold px-2 cursor-pointer"
+          href={href}
+        >
+          <span>Lihat Semua</span>
+        </Link>
+      )}
 
-      {hidden ? (
+      {hiddenNav ? (
         ""
       ) : (
         <>

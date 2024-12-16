@@ -53,7 +53,7 @@ async function HomePage() {
       <CategoryListHomeTemplate
         title={"Kategori Kursus"}
         description={"Pilih kategori kursus yang kamu inginkan"}
-        categoriesData={categoriesData}
+        categoriesData={categoriesData?.data}
       />
 
       <CourseTemplate
@@ -75,7 +75,6 @@ async function HomePage() {
         description={"Ada kendala atau pertanyaan? Kami siap membantu!"}
         data={faqListData.data.home}
       />
-
     </>
   );
 }
