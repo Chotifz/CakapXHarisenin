@@ -43,7 +43,7 @@ const CourseListsTemplate = ({ initialCategories, initialCourses }) => {
     dispatch(setSelectedCategory(sCategory));
     const data = await fetchCourses({
       page: 1,
-      limit: 10,
+      limit: 15,
       filters: { categoriesId: sCategory },
     });
     dispatch(setCourses(data?.data));
@@ -54,14 +54,25 @@ const CourseListsTemplate = ({ initialCategories, initialCourses }) => {
     dispatch(setOrderBy(orderBy));
     const data = await fetchCourses({
       page: 1,
-      limit: 10,
+      limit: 15,
       filters: { categoriesId: selectedCategory, courseOrderBy: orderBy },
     });
     dispatch(setCourses(data?.data));
   };
 
-  const handleFilterPrakerjaChange = (isChecked) => {
-    dispatch(setFilter({ prakerjaFilter: isChecked }));
+  const handleFilterPrakerjaChange = async (isChecked) => {
+    dispatch(resetCourses());
+    dispatch(setFilter({ isChecked }));
+    const data = await fetchCourses({
+      page: 1,
+      limit: 15,
+      filters: {
+        isSupportPrakerja: isChecked,
+        categoriesId: selectedCategory,
+        courseOrderBy: orderBy,
+      },
+    });
+    dispatch(setCourses(data?.data));
   };
 
   const handleScroll = () => {
@@ -73,7 +84,7 @@ const CourseListsTemplate = ({ initialCategories, initialCourses }) => {
       dispatch(
         fetchCoursesThunk({
           page,
-          limit: 10,
+          limit: 15,
           filters: {
             orderBy,
             prakerjaFilter,

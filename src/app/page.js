@@ -25,7 +25,6 @@ async function HomePage() {
     },
   });
 
-  console.log(prakerjaCourses);
   return (
     <>
       <HeroDealTemplate banners={banners} />

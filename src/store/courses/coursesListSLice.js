@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const initialState = {
   list: [],
   page: 1,
-  limit: 10,
+  limit: 15,
   hasMore: true,
   filters: { orderBy: "", prakerjaFilter: false },
   loading: false,
@@ -37,7 +37,7 @@ const coursesSlice = createSlice({
       state.filters.orderBy = action.payload;
     },
     setFilter: (state, action) => {
-      state.filters = { ...state.filters, ...action.payload };
+      state.filters.prakerjaFilter = action.payload.prakerjaFilter;
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
