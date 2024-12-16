@@ -2,9 +2,7 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import {
-  fetchCategoriesThunk,
   setCategories,
   setSelectedCategory,
 } from "@/store/courses/categoriesSlice";
@@ -19,57 +17,71 @@ import {
 import FilterBar from "../fragments/filter-bar";
 import CourseCard from "../fragments/course-card";
 import Loader from "../fragments/loader";
+import { fetchCourses } from "@/lib/api";
 
 const CourseListsTemplate = ({ initialCategories, initialCourses }) => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const {
     list: courses,
     page,
     hasMore,
     loading,
-    orderBy,
-    filter,
+    filters: { orderBy, prakerjaFilter },
   } = useSelector((state) => state.courses);
 
-  // console.log(courses);
-  const { category } = useSelector((state) => state.categories);
+  const { selectedCategory } = useSelector((state) => state.categories);
 
   const filteredCourses = courses.filter((course) => {
-    if (filter.prakerjaFilter) {
+    if (prakerjaFilter) {
       return course.isSupportPrakerja;
     }
     return true;
   });
 
-  const handleFilterChange = (sCategory) => {
+  const handleCategoryChange = async (sCategory) => {
     dispatch(resetCourses());
     dispatch(setSelectedCategory(sCategory));
-    dispatch(
-      fetchCoursesThunk({
-        page: 1,
-        limit: 10,
-        categoriesId: sCategory,
-      })
-    );
+    const data = await fetchCourses({
+      page: 1,
+      limit: 10,
+      filters: { categoriesId: sCategory },
+    });
+    dispatch(setCourses(data?.data));
   };
-  const handleOrderChange = (orderBy) => {
+
+  const handleOrderChange = async (orderBy) => {
     dispatch(resetCourses());
     dispatch(setOrderBy(orderBy));
-    dispatch(
-      fetchCoursesThunk({
-        page: 1,
-        limit: 10,
-        categoriesId: category,
-        courseOrderBy: orderBy,
-      })
-    );
+    const data = await fetchCourses({
+      page: 1,
+      limit: 10,
+      filters: { categoriesId: selectedCategory, courseOrderBy: orderBy },
+    });
+    dispatch(setCourses(data?.data));
   };
+
   const handleFilterPrakerjaChange = (isChecked) => {
     dispatch(setFilter({ prakerjaFilter: isChecked }));
   };
-  const handleCourseClick = (id) => {
-    router.push(`/courses/${id}`);
+
+  const handleScroll = () => {
+    const isNearBottom =
+      window.innerHeight + document.documentElement.scrollTop >=
+      document.documentElement.offsetHeight - 900;
+    if (isNearBottom && !loading && hasMore) {
+      dispatch(incrementPage());
+      dispatch(
+        fetchCoursesThunk({
+          page,
+          limit: 10,
+          filters: {
+            orderBy,
+            prakerjaFilter,
+            categoriesId: selectedCategory,
+          },
+        })
+      );
+    }
   };
 
   useEffect(() => {
@@ -78,42 +90,29 @@ const CourseListsTemplate = ({ initialCategories, initialCourses }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const isNearBottom =
-        window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight - 100;
-      if (isNearBottom && !loading && hasMore) {
-        dispatch(incrementPage());
-        dispatch(setCourses(initialCourses));
-      }
-    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [hasMore, loading, page, dispatch]);
-
   return (
     <>
       <FilterBar
         categories={initialCategories}
-        selectedCategory={category}
-        onFilterChange={handleFilterChange}
+        selectedCategory={selectedCategory}
+        onCategoryChange={handleCategoryChange}
         onOrderChange={handleOrderChange}
         orderBy={orderBy}
-        onFilterPrakerja={filter.prakerjaFilter}
+        filterPrakerjaChecked={prakerjaFilter}
         onFilterPrakerjaChange={handleFilterPrakerjaChange}
       />
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-10 ">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-10 pb-5">
         {filteredCourses.map((course, index) => (
-          <CourseCard
-            key={`${course.courseId}-${index}`}
-            course={course}
-            onClickChange={handleCourseClick}
-          />
+          <CourseCard key={`${course.courseId}-${index}`} course={course} />
         ))}
       </div>
       {loading && <Loader />}
     </>
   );
 };
+
 export default CourseListsTemplate;

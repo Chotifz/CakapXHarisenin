@@ -10,17 +10,11 @@ export const fetchBanners = async () => {
   }
 };
 
-export const fetchCourses = async ({
-  page = 1,
-  limit = 10,
-  categoriesId,
-  courseOrderBy,
-}) => {
+export const fetchCourses = async ({ page = 1, limit = 10, filters = {} }) => {
   const params = {
     page,
     limit,
-    ...(categoriesId && { categoriesId }),
-    ...(courseOrderBy && { courseOrderBy }),
+    ...filters,
   };
 
   try {

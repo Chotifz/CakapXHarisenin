@@ -4,7 +4,7 @@ import { Card, CardContent, CardFooter, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { useRouter } from "next/navigation";
 
-function CourseCard({ course, onClickChange }) {
+function CourseCard({ course }) {
   const router = useRouter();
   const handleCourseClick = (id) => {
     router.push(`/courses/${id}`);

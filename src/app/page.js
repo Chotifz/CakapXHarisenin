@@ -4,6 +4,7 @@ import HeroDealTemplate from "@/components/template/hero-deal-template";
 import { fetchBanners, fetchCourses, fetchHighlightedCourses } from "@/lib/api";
 import PartnerListHomeTemplate from "@/components/template/partner-list-home-template";
 import LiveBahasa from "@/components/template/live-bahasa";
+import PrakerjaTitle from "@/components/ui/prakerja-title";
 
 async function HomePage() {
   const banners = await fetchBanners();
@@ -11,9 +12,20 @@ async function HomePage() {
   const bestSellerCourses = await fetchCourses({
     page: 1,
     limit: 20,
-    courseOrderBy: "BEST_SELLER",
+    filters: {
+      courseOrderBy: "BEST_SELLER",
+    },
+  });
+  const prakerjaCourses = await fetchCourses({
+    page: 1,
+    limit: 5,
+    filters: {
+      courseOrderBy: "HIGHLIGHT_PRAKERJA",
+      isSupportPrakerja: true,
+    },
   });
 
+  console.log(prakerjaCourses);
   return (
     <>
       <HeroDealTemplate banners={banners} />
@@ -27,7 +39,13 @@ async function HomePage() {
         description={""}
         courses={bestSellerCourses?.data?.course}
       />
-      {/* <LiveBahasa /> */}
+      <LiveBahasa />
+      <CourseTemplate
+        title={<PrakerjaTitle />}
+        description={"Ikut pelatihan Prakerja terbaik di Cakap"}
+        hidden={true}
+        courses={prakerjaCourses?.data?.course}
+      />
       <PartnerListHomeTemplate />
       <FaqTemplate />
     </>

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   list: [],
-  category: "",
+  selectedCategory: "",
 };
 
 const categoriesSlice = createSlice({
@@ -13,7 +13,7 @@ const categoriesSlice = createSlice({
       state.list = action.payload;
     },
     setSelectedCategory: (state, action) => {
-      state.category = action.payload;
+      state.selectedCategory = action.payload;
     },
   },
 });
