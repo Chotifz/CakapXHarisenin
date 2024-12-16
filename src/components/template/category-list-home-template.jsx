@@ -1,6 +1,7 @@
 "use client";
 
 import SectionTemplate from "./section-template";
+import Voucher from "../fragments/voucher";
 import Navigation from "../fragments/navigation";
 import { useEffect, useState } from "react";
 import CardLogo from "../fragments/card-logo";
@@ -79,6 +80,11 @@ export default function CategoryListHomeTemplate({
           ))}
         </div>
       </div>
+      <Voucher
+        icon=""
+        text="Punya kode belajar? Tukar kode belajarmu di sini"
+        buttonText="Tukar Code"
+      />
     </SectionTemplate>
   );
 }

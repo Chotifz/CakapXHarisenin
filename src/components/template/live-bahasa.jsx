@@ -2,6 +2,7 @@ import CardFragment from "../fragments/card-fragment";
 import { Button } from "../ui/button";
 import { fetchBannerBahasa, fetchClubList } from "@/lib/api";
 import SectionTemplate from "./section-template";
+import Voucher from "../fragments/voucher";
 
 const LiveBahasa = async () => {
   const { data } = await fetchBannerBahasa();
@@ -75,6 +76,11 @@ const LiveBahasa = async () => {
           />
         </div>
       </div>
+      <Voucher
+        icon=""
+        text="Tukar kode belajar Cakap Club di sini"
+        buttonText="Tukar Code"
+      />
     </SectionTemplate>
   );
 };
