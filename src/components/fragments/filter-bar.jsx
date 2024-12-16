@@ -12,10 +12,10 @@ import { Button } from "../ui/button";
 export default function FilterBar({
   categories,
   selectedCategory,
-  onFilterChange,
+  onCategoryChange,
   onOrderChange,
   orderBy,
-  onFilterPrakerja,
+  filterPrakerjaChecked,
   onFilterPrakerjaChange,
 }) {
   const selectedCategoryForName = categories.find(
@@ -49,7 +49,7 @@ export default function FilterBar({
                     ? "border-b-2 border-black"
                     : ""
                 }`}
-                onClick={() => onFilterChange(cat.categoriesId)}
+                onClick={() => onCategoryChange(cat.categoriesId)}
               >
                 <div className="relative">
                   <img className="w-6" src={cat.icon} alt={cat.categoryName} />
@@ -80,7 +80,7 @@ export default function FilterBar({
           <label>
             <input
               type="checkbox"
-              checked={onFilterPrakerja}
+              checked={filterPrakerjaChecked}
               onChange={(e) => onFilterPrakerjaChange(e.target.checked)}
             />
             <span className="px-2 ">Kursus Prakerja</span>

@@ -7,6 +7,10 @@ export default function PartnerListItem({ items, classname }) {
           <CardLogo
             imgName={item.partnerName}
             imgUrl={item.partnerLogo?.square}
+            classname={"rounded-md w-24 h-24"}
+            tooltip={true}
+            hrefName={item.partnerName}
+            id={item.partnerId}
           />
         </div>
       ))}

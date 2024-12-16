@@ -14,7 +14,7 @@ export const HeaderTemplate = () => {
           <Link href="/">
             <img
               className=" max-w-28 w-28"
-              src="https://s3-ap-southeast-1.amazonaws.com/resources.squline.com/upskill/assets/svg/cakap-logo.svg"
+              src="/icons/cakap-logo.svg"
               alt="Cakap Logo"
             />
           </Link>

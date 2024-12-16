@@ -3,7 +3,7 @@ import { fetchCategories, fetchCourses } from "@/lib/api";
 
 export default async function CoursesPage() {
   const categoriesData = await fetchCategories();
-  const coursesData = await fetchCourses({ page: 1, limit: 10 });
+  const coursesData = await fetchCourses({ page: 1, limit: 15 });
 
   return (
     <CourseListsTemplate
