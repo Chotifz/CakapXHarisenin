@@ -1,25 +1,21 @@
 "use client";
 
 import SectionTemplate from "@/components/template/section-template";
-import CardLogoLoader from "@/components/fragments/card-logo-loader";
 import PartnerListItem from "@/components/fragments/partnerlist-item";
+import CardLogoLoader from "../fragments/card-logo-loader";
 
-import { useDispatch, useSelector } from "react-redux";
-import { fetchPartnerCourseThunk } from "@/store/partners-list/partnerListHomeSlice";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+
 import Link from "next/link";
 
-export default function PartnerListHomeTemplate() {
-  const dispatch = useDispatch();
-  const { courses, loading, error } = useSelector(
-    (state) => state.partnersListHome
-  );
+export default function PartnerListHomeTemplate({ data }) {
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchPartnerCourseThunk());
-  }, []);
-
-  console.log(courses);
+    if (data) {
+      setIsLoading(false);
+    }
+  }, [data]);
 
   return (
     <SectionTemplate
@@ -36,9 +32,11 @@ export default function PartnerListHomeTemplate() {
         </Link>
       </div>
       <div className="pb-10">
-        {loading && <CardLogoLoader />}
-        {error && <p>{error}</p>}
-        <PartnerListItem items={courses} classname="justify-center" />
+        {isLoading ? (
+          <CardLogoLoader />
+        ) : (
+          <PartnerListItem items={data} classname="justify-center" />
+        )}
       </div>
     </SectionTemplate>
   );
