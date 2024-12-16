@@ -4,23 +4,11 @@ import { Button } from "../ui/button";
 import BannerPage from "../fragments/banner-page";
 import PartnerListItem from "../fragments/partnerlist-item";
 
-import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchBothPartnersThunk,
-  setSelectedCategory,
-} from "@/store/partners-list/partnersListSlice";
-import { useEffect } from "react";
-import CardLogoLoader from "../fragments/card-logo-loader";
+import { useState } from "react";
+// import CardLogoLoader from "../fragments/card-logo-loader";
 
-export default function PartnersListTemplate() {
-  const dispatch = useDispatch();
-  const { courses, payments, selectedCategory, loading, error } = useSelector(
-    (state) => state.partnersList
-  );
-
-  useEffect(() => {
-    dispatch(fetchBothPartnersThunk());
-  }, [dispatch]);
+export default function PartnersListTemplate({ courses, payments }) {
+  const [selectedCategory, setSelectedCategory] = useState("COURSE");
 
   return (
     <div className="mb-20">
@@ -36,20 +24,20 @@ export default function PartnersListTemplate() {
 
       <div>
         <Button
+          onClick={() => setSelectedCategory("COURSE")}
           variant="ghost"
           className={`${
             selectedCategory === "COURSE" ? "border-b-2 border-black" : ""
           }`}
-          onClick={() => dispatch(setSelectedCategory("COURSE"))}
         >
           Mitra Pendidikan
         </Button>
         <Button
+          onClick={() => setSelectedCategory("PAYMENT")}
           variant="ghost"
           className={`${
             selectedCategory === "PAYMENT" ? "border-b-2 border-black" : ""
           }`}
-          onClick={() => dispatch(setSelectedCategory("PAYMENT"))}
         >
           Mitra Pendukung
         </Button>
@@ -64,7 +52,7 @@ export default function PartnersListTemplate() {
               berbagai benefit ketika kamu bertransaksi.
             </p>
 
-            {loading && <CardLogoLoader />}
+            {/* {isLoading && <CardLogoLoader />} */}
             <PartnerListItem
               items={courses}
               classname="justify-center md:justify-normal"
@@ -80,7 +68,7 @@ export default function PartnersListTemplate() {
               berbagai benefit ketika kamu bertransaksi.
             </p>
 
-            {loading && <CardLogoLoader />}
+            {/* {isLoading && <CardLogoLoader />} */}
             <PartnerListItem items={payments} />
           </div>
         )}
