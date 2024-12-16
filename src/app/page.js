@@ -27,7 +27,7 @@ async function HomePage() {
         description={""}
         courses={bestSellerCourses?.data?.course}
       />
-      {/* <LiveBahasa /> */}
+      <LiveBahasa />
       <PartnerListHomeTemplate />
       <FaqTemplate />
     </>

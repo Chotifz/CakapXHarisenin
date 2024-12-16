@@ -10,15 +10,15 @@ export default function CardFragment({
   header, // Elemen untuk header (teks, gambar, atau ikon)
   content, // Elemen untuk konten utama (teks atau dll)
   footer, // Elemen untuk footer (harga, tombol, atau dll)
-  className = "w-1/4 flex-shrink-0",
+  className = "w-full flex-shrink-0", // Gunakan full width untuk setiap card
 }) {
   return (
-    <Card className={className}>
+    <Card className={`flex flex-col border rounded-lg shadow-md ${className}`}>
       <CardHeader className="bg-secondary p-3">{header}</CardHeader>
-      <CardContent>
+      <CardContent className="flex-1 p-4">
         {typeof content === "string" ? <p>{content}</p> : content}
       </CardContent>
-      <CardFooter>{footer}</CardFooter>
+      <CardFooter className="p-3">{footer}</CardFooter>
     </Card>
   );
 }
