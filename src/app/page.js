@@ -62,6 +62,7 @@ async function HomePage() {
         courses={bestSellerCourses?.data?.course}
       />
       <LiveBahasa />
+
       <CourseTemplate
         title={<PrakerjaTitle />}
         description={"Ikut pelatihan Prakerja terbaik di Cakap"}
@@ -74,6 +75,7 @@ async function HomePage() {
         description={"Ada kendala atau pertanyaan? Kami siap membantu!"}
         data={faqListData.data.home}
       />
+
     </>
   );
 }
