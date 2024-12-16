@@ -39,7 +39,7 @@ const AboutCourse = async ({ params }) => {
     });
 
     return (
-      <div className="w-8/12 border border-white py-4 pr-10 text-black">
+      <div className="md:w-8/12 w-full border border-white py-4 pr-10 text-black">
         <div>
           <div className="flex mb-6 gap-2">
             {partner.partnerLogo?.square && (

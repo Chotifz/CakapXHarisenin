@@ -14,7 +14,7 @@ const PriceCourse = async ({ params }) => {
 
     return (
       <div
-        className="w-2/6 border border-slate-300 p-4 sticky my-4 rounded-md"
+        className="md:w-2/6 w-full border border-slate-300 p-4 sticky my-4 rounded-md"
         style={{ top: "5rem", height: "fit-content" }}
       >
         <div className="flex justify-between">

@@ -8,7 +8,7 @@ const AboutCourseTemplate = async ({ params }) => {
   }
 
   return (
-    <section className="flex">
+    <section className="flex md:flex-row flex-col">
       <AboutCourse params={params} />
       <PriceCourse params={params} />
     </section>
