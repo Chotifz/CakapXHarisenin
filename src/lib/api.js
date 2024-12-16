@@ -82,9 +82,9 @@ export const fetchDetail = async (id, platform = "WEB") => {
   }
 };
 
-export const fetchSummary = async () => {
+export const fetchSummary = async (id) => {
   try {
-    const response = await axiosInstance.get("/rating/815/summary");
+    const response = await axiosInstance.get(`/rating/${id}/summary`);
     return response.data;
   } catch (error) {
     console.error("API Error:", error.message);

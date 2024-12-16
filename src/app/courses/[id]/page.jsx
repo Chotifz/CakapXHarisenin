@@ -14,7 +14,7 @@ export default async function DetailList({ params }) {
   try {
     const [courseDetail, summary, courseHighlight] = await Promise.all([
       fetchDetail(id, "WEB"),
-      fetchSummary(),
+      fetchSummary(id),
       fetchHighlightedCourses(),
     ]);
 
@@ -47,7 +47,7 @@ export default async function DetailList({ params }) {
 
         <AboutCourseTemplate params={params} />
 
-        <CourseTemplate courses={courseHighlight} tittle="Kursus Terkait" />
+        {/* <CourseTemplate courses={courseHighlight} tittle="Kursus Terkait" /> */}
       </div>
     );
   } catch (error) {
