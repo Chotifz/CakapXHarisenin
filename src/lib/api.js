@@ -1,4 +1,5 @@
 import axiosInstance from "@/lib/axios";
+import axios from "axios";
 
 export const fetchBanners = async () => {
   try {
@@ -115,8 +116,25 @@ export const fetchFaqList = async ({ tenant = "cakap" }) => {
 
 export const fetchClubList = async () => {
   try {
-    const response = await axiosInstance.get(
+    const response = await axios.get(
       "https://api-staging.cakap.com/v2/cakap-group/club-list"
+    );
+    return response.data;
+  } catch (error) {
+    console.error("API Error:", error.message);
+    return [];
+  }
+};
+
+export const fetchSimiliarCourse = async ({ categoriesId, id }) => {
+  try {
+    const response = await axiosInstance.get(
+      `/course/recommendations/${categoriesId}`,
+      {
+        params: {
+          courseId: id,
+        },
+      }
     );
     return response.data;
   } catch (error) {

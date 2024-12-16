@@ -2,7 +2,12 @@ import BannerPage from "@/components/fragments/banner-page";
 import AboutCourseTemplate from "@/components/template/about-course-template";
 import CourseTemplate from "@/components/template/course-template";
 
-import { fetchDetail, fetchSummary, fetchHighlightedCourses } from "@/lib/api";
+import {
+  fetchDetail,
+  fetchSummary,
+  fetchHighlightedCourses,
+  fetchSimiliarCourse,
+} from "@/lib/api";
 
 export default async function DetailList({ params }) {
   const { id } = await params;
@@ -12,14 +17,18 @@ export default async function DetailList({ params }) {
   }
 
   try {
-    const [courseDetail, summary, courseHighlight] = await Promise.all([
+    const [courseDetail, summary] = await Promise.all([
       fetchDetail(id, "WEB"),
       fetchSummary(id),
-      fetchHighlightedCourses(),
     ]);
 
-    const { courseName, categoriesName, icon } = courseDetail.data;
+    const { courseName, categoriesName, icon, categoriesId } =
+      courseDetail.data;
     const { totalReviewer, avgRating } = summary.data;
+    const courseSimiliar = await fetchSimiliarCourse({
+      categoriesId: categoriesId,
+      id,
+    });
 
     return (
       <div className="text-white">
@@ -47,7 +56,10 @@ export default async function DetailList({ params }) {
 
         <AboutCourseTemplate params={params} />
 
-        {/* <CourseTemplate courses={courseHighlight} tittle="Kursus Terkait" /> */}
+        <CourseTemplate
+          courses={courseSimiliar?.data}
+          tittle="Kursus Terkait"
+        />
       </div>
     );
   } catch (error) {
