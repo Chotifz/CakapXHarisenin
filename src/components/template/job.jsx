@@ -1,10 +1,11 @@
-"use client"; // Menandakan ini adalah komponen klien
+"use client";
 
 import { useState } from "react";
 import Navigation from "../fragments/navigation";
 import SectionTemplate from "./section-template";
 import CardFragment from "../fragments/card-fragment";
 import { Button } from "../ui/button";
+import { Briefcase, MapPin } from "lucide-react";
 
 const JobTemplate = ({ jobs }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -35,7 +36,6 @@ const JobTemplate = ({ jobs }) => {
         cardsPerView={cardsPerView}
       />
 
-      {/* Wrapper Carousel */}
       <div
         className="w-full flex gap-4 transition-transform duration-500"
         style={{
@@ -43,28 +43,38 @@ const JobTemplate = ({ jobs }) => {
         }}
       >
         {jobs.map((job, index) => (
-          <div
-            key={job.id}
-            className="w-[calc(25%-1rem)] flex-shrink-0" // 4 card per slide
-          >
+          <div key={job.id} className="w-[calc(25%-1rem)] flex-shrink-0">
             <CardFragment
               minHeight="min-h-[300px]"
               header={
-                <h2 className="text-lg font-semibold text-primary">
-                  {job.title || "No title available"}
-                </h2>
+                <div className="min-h-[70px] flex justify-center flex-col">
+                  <h1
+                    className="text-md font-semibold text-primary"
+                    dangerouslySetInnerHTML={{
+                      __html: job.title || "No Title",
+                    }}
+                  />
+                  <h2
+                    className="text-sm"
+                    dangerouslySetInnerHTML={{
+                      __html: job.company || "No Company",
+                    }}
+                  />
+                </div>
               }
               content={
-                <div className="text-gray-700">
-                  <p>
-                    <strong>Type:</strong> {job.jobtype || "N/A"}
-                  </p>
-                  <p>
-                    <strong>City:</strong> {job.city || "N/A"}
-                  </p>
-                  <p>
-                    <strong>Country:</strong> {job.country || "N/A"}
-                  </p>
+                <div className="text-gray-700 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Briefcase size={18} className="text-blue-500" />
+                    <span className="text-sm">{job.jobtype || "N/A"}</span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <MapPin size={18} className="text-blue-500" />
+                    <span className="text-sm">
+                      {job.city ? `${job.city},` : ""} {job.country || "N/A"}
+                    </span>
+                  </div>
                 </div>
               }
               footer={
