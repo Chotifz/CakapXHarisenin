@@ -19,7 +19,7 @@ const Navigation = ({
       ) : (
         <Link
           className="text-primary font-bold px-2 cursor-pointer"
-          href={href}
+          href={href || "#"}
         >
           <span>Lihat Semua</span>
         </Link>
