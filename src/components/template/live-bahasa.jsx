@@ -22,6 +22,7 @@ const LiveBahasa = async () => {
             return (
               <CardFragment
                 className="border rounded-lg shadow-md w-full"
+                minHeight="min-h-[250px]"
                 key={index}
                 header={
                   <div className="flex gap-4 items-center max-h-10">

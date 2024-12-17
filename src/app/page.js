@@ -8,14 +8,14 @@ import {
   fetchCategories,
   fetchPartnersList,
   fetchFaqList,
+  fetchJobList,
 } from "@/lib/api";
 import PartnerListHomeTemplate from "@/components/template/partner-list-home-template";
 import LiveBahasa from "@/components/template/live-bahasa";
 import PrakerjaTitle from "@/components/ui/prakerja-title";
 import CategoryListHomeTemplate from "@/components/template/category-list-home-template";
-
 import PrakerjaVoucher from "@/components/ui/prakerja-voucher";
-
+import JobTemplate from "@/components/template/job";
 async function HomePage() {
   const banners = await fetchBanners();
   const courseHighlight = await fetchHighlightedCourses();
@@ -44,6 +44,8 @@ async function HomePage() {
 
   const faqListData = await fetchFaqList({ tenant: "cakap" });
 
+  const jobs = await fetchJobList();
+
   return (
     <>
       <HeroDealTemplate banners={banners} />
@@ -65,7 +67,7 @@ async function HomePage() {
         filterType={"BEST_SELLER"}
       />
       <LiveBahasa />
-
+      <JobTemplate jobs={jobs} />
       <div className="bg-gradient-to-t from-teal-600 to-gray-100">
         <CourseTemplate
           title={<PrakerjaTitle />}
@@ -76,7 +78,6 @@ async function HomePage() {
         <PrakerjaVoucher />
       </div>
 
-      {/*  */}
       <PartnerListHomeTemplate data={partnerListData?.data?.partner} />
       <FaqTemplate
         title={"Yang Sering Ditanyakan"}

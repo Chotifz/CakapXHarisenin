@@ -140,3 +140,15 @@ export const fetchSimiliarCourse = async ({ categoriesId, id }) => {
     return [];
   }
 };
+
+export const fetchJobList = async () => {
+  try {
+    const response = await axios.get(
+      "https://career-staging.cakap.com/wp-json/custom/v1/jobs"
+    );
+    return response.data;
+  } catch (error) {
+    console.error("API Error:", error.message);
+    return [];
+  }
+};
