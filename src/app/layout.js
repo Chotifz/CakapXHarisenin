@@ -22,9 +22,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className={inter.className}>
           <HeaderTemplate />
-          <div className="flex flex-col bg-white w-full max-w-7xl mx-auto px-4  ">
-            {children}
-          </div>
+          <div className=" bg-white w-full">{children}</div>
           <FooterTemplate />
         </body>
       </html>

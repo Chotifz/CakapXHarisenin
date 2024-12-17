@@ -4,7 +4,7 @@ import IconC from "../ui/icon";
 const FooterMiddle = () => {
   return (
     <div className="bg-cyan-600 rounded-2xl flex-col flex sm:flex-row justify-between gap-10 lg:flex-col p-6 my-8">
-      <div className="w-full">
+      <div className="w-full overflow-hidden">
         <p className=" font-semibold text-sm tracking-wide pb-4">
           Telah Terdaftar Oleh
         </p>

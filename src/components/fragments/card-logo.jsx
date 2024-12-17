@@ -24,10 +24,16 @@ export default function CardLogo({
         <div
           className={`relative flex justify-center group border ${classname} cursor-pointer`}
         >
-          <img src={imgUrl} alt={imgName} className={`p-4 w-full`} />
+          <img
+            src={imgUrl}
+            alt={imgName}
+            className={`md:p-4 p-3  h-full rounded-full w-full`}
+          />
           {tooltip && <Tooltip>{imgName}</Tooltip>}
         </div>
-        {category && <p className="text-base text-center mt-2">{imgName}</p>}
+        {category && (
+          <p className=" text-xs md:text-sm text-center mt-2">{imgName}</p>
+        )}
       </div>
     </Link>
   );

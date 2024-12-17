@@ -49,7 +49,6 @@ export const fetchHighlightedCourses = async () => {
 
 export const fetchPartnersList = async ({ partnerType, showAll, limit }) => {
   try {
-    console.log("Fetching partners with partnerType:", partnerType);
     const response = await axiosInstance.get("/partner", {
       params: {
         partnerType,
@@ -57,7 +56,7 @@ export const fetchPartnersList = async ({ partnerType, showAll, limit }) => {
         limit,
       },
     });
-    console.log("API Response:", response.data);
+
     return response.data;
   } catch (error) {
     console.error("API Error:", error.message);
@@ -106,7 +105,6 @@ export const fetchFaqList = async ({ tenant = "cakap" }) => {
         tenant,
       },
     });
-    console.log("API Response:", response.data);
     return response.data;
   } catch (error) {
     console.error("API Error:", error.message);

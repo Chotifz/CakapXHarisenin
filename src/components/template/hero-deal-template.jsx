@@ -5,7 +5,7 @@ import { Skeleton } from "../ui/skeleton";
 
 const HeroDealTemplate = ({ banners }) => {
   return (
-    <div>
+    <div className="max-w-7xl mx-auto px-4">
       {banners?.data?.length ? (
         <BannerCarousel banners={banners.data} />
       ) : (

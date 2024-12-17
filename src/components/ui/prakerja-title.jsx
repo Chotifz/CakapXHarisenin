@@ -4,7 +4,7 @@ export default function PrakerjaTitle() {
       href="/"
       aria-label="Go home"
       title="Company"
-      className="inline-flex gap-3 items-center pb-4  "
+      className="inline-flex gap-3 items-center mb-2 p-2 border-y-tertiary border-b shadow-md"
     >
       <img
         className="w-40 border-none"

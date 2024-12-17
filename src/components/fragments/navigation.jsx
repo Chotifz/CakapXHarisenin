@@ -11,18 +11,19 @@ const Navigation = ({
   hiddenNav,
   hiddenLink,
   cardsPerView,
+  handleViewAll,
 }) => {
   return (
     <div className="w-full flex gap-2 justify-end items-center mb-4">
       {hiddenLink ? (
         ""
       ) : (
-        <Link
+        <div
           className="text-primary font-bold px-2 cursor-pointer"
-          href={href}
+          onClick={handleViewAll}
         >
           <span>Lihat Semua</span>
-        </Link>
+        </div>
       )}
 
       {hiddenNav ? (

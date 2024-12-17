@@ -81,7 +81,7 @@ export default function FilterBar({
             <input
               type="checkbox"
               checked={filterPrakerjaChecked}
-              onChange={(e) => onFilterPrakerjaChange(e.target.checked)}
+              onChange={onFilterPrakerjaChange}
             />
             <span className="px-2 ">Kursus Prakerja</span>
           </label>

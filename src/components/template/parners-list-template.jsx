@@ -11,7 +11,7 @@ export default function PartnersListTemplate({ courses, payments }) {
   const [selectedCategory, setSelectedCategory] = useState("COURSE");
 
   return (
-    <div className="mb-20">
+    <div className="mb-20 max-w-7xl w-full mx-auto px-4">
       <div className="pt-4">
         <BannerPage>
           <div className="h-44 relative w-full">

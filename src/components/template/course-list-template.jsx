@@ -49,30 +49,33 @@ const CourseListsTemplate = ({ initialCategories, initialCourses }) => {
     dispatch(setCourses(data?.data));
   };
 
-  const handleOrderChange = async (orderBy) => {
+  const handleOrderChange = async (orderSelect) => {
     dispatch(resetCourses());
-    dispatch(setOrderBy(orderBy));
+    dispatch(setOrderBy(orderSelect));
     const data = await fetchCourses({
       page: 1,
       limit: 15,
-      filters: { categoriesId: selectedCategory, courseOrderBy: orderBy },
+      filters: { categoriesId: selectedCategory, courseOrderBy: orderSelect },
     });
     dispatch(setCourses(data?.data));
   };
 
-  const handleFilterPrakerjaChange = async (isChecked) => {
+  const handleFilterPrakerjaChange = async () => {
     dispatch(resetCourses());
-    dispatch(setFilter({ isChecked }));
-    const data = await fetchCourses({
-      page: 1,
-      limit: 15,
-      filters: {
-        isSupportPrakerja: isChecked,
-        categoriesId: selectedCategory,
-        courseOrderBy: orderBy,
-      },
-    });
-    dispatch(setCourses(data?.data));
+    dispatch(setFilter({ prakerjaFilter: !prakerjaFilter }));
+
+    const updatedPrakerjaFilter = prakerjaFilter;
+    dispatch(
+      fetchCoursesThunk({
+        page: 1,
+        limit: 15,
+        filters: {
+          orderBy,
+          isSupportPrakerja: updatedPrakerjaFilter,
+          categoriesId: selectedCategory,
+        },
+      })
+    );
   };
 
   const handleScroll = () => {
@@ -87,7 +90,7 @@ const CourseListsTemplate = ({ initialCategories, initialCourses }) => {
           limit: 15,
           filters: {
             orderBy,
-            prakerjaFilter,
+            isSupportPrakerja: prakerjaFilter,
             categoriesId: selectedCategory,
           },
         })
@@ -103,9 +106,10 @@ const CourseListsTemplate = ({ initialCategories, initialCourses }) => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [hasMore, loading, page, dispatch]);
+  }, [hasMore, loading, page, dispatch, orderBy]);
+
   return (
-    <>
+    <section className="max-w-7xl w-full mx-auto px-4">
       <FilterBar
         categories={initialCategories}
         selectedCategory={selectedCategory}
@@ -115,14 +119,21 @@ const CourseListsTemplate = ({ initialCategories, initialCourses }) => {
         filterPrakerjaChecked={prakerjaFilter}
         onFilterPrakerjaChange={handleFilterPrakerjaChange}
       />
+      {courses.length ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-10 pb-5">
+          {filteredCourses.map((course, index) => (
+            <CourseCard key={`${course.courseId}-${index}`} course={course} />
+          ))}
+        </div>
+      ) : (
+        <div className="pt-10">
+          {" "}
+          <Loader />
+        </div>
+      )}
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-10 pb-5">
-        {filteredCourses.map((course, index) => (
-          <CourseCard key={`${course.courseId}-${index}`} course={course} />
-        ))}
-      </div>
       {loading && <Loader />}
-    </>
+    </section>
   );
 };
 

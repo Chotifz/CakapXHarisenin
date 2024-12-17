@@ -14,19 +14,21 @@ import LiveBahasa from "@/components/template/live-bahasa";
 import PrakerjaTitle from "@/components/ui/prakerja-title";
 import CategoryListHomeTemplate from "@/components/template/category-list-home-template";
 
+import PrakerjaVoucher from "@/components/ui/prakerja-voucher";
+
 async function HomePage() {
   const banners = await fetchBanners();
   const courseHighlight = await fetchHighlightedCourses();
   const bestSellerCourses = await fetchCourses({
     page: 1,
-    limit: 20,
+    limit: 15,
     filters: {
       courseOrderBy: "BEST_SELLER",
     },
   });
   const prakerjaCourses = await fetchCourses({
     page: 1,
-    limit: 5,
+    limit: 15,
     filters: {
       courseOrderBy: "HIGHLIGHT_PRAKERJA",
       isSupportPrakerja: true,
@@ -60,15 +62,21 @@ async function HomePage() {
         title={"Kursus Terlaris"}
         description={""}
         courses={bestSellerCourses?.data?.course}
+        filterType={"BEST_SELLER"}
       />
       <LiveBahasa />
 
-      <CourseTemplate
-        title={<PrakerjaTitle />}
-        description={"Ikut pelatihan Prakerja terbaik di Cakap"}
-        hidden={true}
-        courses={prakerjaCourses?.data?.course}
-      />
+      <div className="bg-gradient-to-t from-teal-600 to-gray-100">
+        <CourseTemplate
+          title={<PrakerjaTitle />}
+          description={"Ikut pelatihan Prakerja terbaik di Cakap"}
+          courses={prakerjaCourses?.data?.course}
+          filterType={"PRAKERJA"}
+        />
+        <PrakerjaVoucher />
+      </div>
+
+      {/*  */}
       <PartnerListHomeTemplate data={partnerListData?.data?.partner} />
       <FaqTemplate
         title={"Yang Sering Ditanyakan"}

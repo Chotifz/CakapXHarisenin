@@ -6,7 +6,7 @@ const initialState = {
   page: 1,
   limit: 15,
   hasMore: true,
-  filters: { orderBy: "", prakerjaFilter: false },
+  filters: { orderBy: "", prakerjaFilter: false, isSupportBnsp: false },
   loading: false,
 };
 export const fetchCoursesThunk = createAsyncThunk(
